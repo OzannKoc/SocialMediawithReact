@@ -1,0 +1,10 @@
+server:
+  port: 8084
+spring:
+  jpa:
+    properties:
+      javax:
+        persistence:
+          validation:
+            mode : none 
+   

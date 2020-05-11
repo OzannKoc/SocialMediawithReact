@@ -1,0 +1,34 @@
+1 Spring ( Kendi anatasyonumuzu oluşturabiliyoruz diğer anatosyonların benzer class üstü eklenti-anatosyonlarını belirterek ve bu eklenti-
+	anatosyon içinde logic i işleyen class ı belirtiyoruz.Bu class da ConstraintValidator interfacesini imp ediyor.Application.properties içinde spring in default davranışlarını override 
+	edebiliyoruz.Örn;Validation.messages diye bir dil eklentisi var . Bunu kendimiz ekleyip sonra içinde key , value olarak değerler
+	verip.Anatosyon içinde bu key i belirtip spring in default validation mesaj cevabını değiştirebiliyoruz
+	Json da boş alanları göndermemsı için JsonInclude özelliği içinden belirtip düzenleyebiliyoruz.ViewJson ile de aynı şeyleri
+	daha da özelleştirebiliriz.Örn;Fieldleri base bir class altında toplayıp sonra bu class ı validation yaptığımız metod da belirtip
+	farklı classlarla işaretlenmiş olan fieldları method return ettiği json nesnesinde göndermez bize.
+	Bütün errorların default control ediliği ve ona göre cevap döndüğü ErrorController interfaceni imp ederek orada belrttiğimiz pathe
+	hataları yönlendirebiliriz.ErrorAttributes interface de bize bu hataların özelliklerini döner.Bunu kullanmak içinde getAttributes methodu
+	içine WebRequest parametresini ve true değerini geçmemiz gerekiyor.Bu method bize bir map dönüyor.Default olarak message,status,errors
+	gibi keylerle değerlerini alabiliyoruz.)
+2 Spring security (Bütün sayfalar security aktifken  unauthorize requestler login sayfasına yönlendirilir.Bunu yapan class ise
+		SecurityAutoConfiguration.class dır.Bunu spring boot anatasyonun içine exclude = SecurityAutoConfiguration.class
+		yazarak deaktif edebiliriz.UserDetails,UserDetailsService ile loginpage ile gönderdiğimiz kullancı adı ve passwordu
+		alabiliyoruz ve bunu springsecurity e paslıyoruz.SpringSecurityConfig class ında bunu impl ettiğimiz method içinde
+		kullanıyoruz.Kimliği doğrulanmış user ı getPrincipal method u ile alıp istediğimiz pojo yü belirterek onun tipinde elde
+		edebiliyoruz.Bunu anastasyon yazarak da yapabiliriz.Anatasyonumuz da @AuthenticationPrincipal ı kullnarak. Örn; Anastasyon
+		ismi AuthorizedUser sa. @AuthorizedUser User user diye elde edebiliriz.)
+3 Spring Data (JpaRepository i extends ettiğimiz interface içinde istediğimiz method tanımlamalarını JpaRep in method tanımlamalarına
+		uyarak yapabiliyoruz)
+4 H2 db (mem yazarak memory de calıstırabiliyoruz. mem yerine datasource değiştirilerek ./dbismini yazarak kalıcı kayıt yapabiliyoruz.
+	Application.properties (uzantısı yaml da oluyor) JPA.HİBERNATE.DDL-AUTO:  default olarak app başlarken create-drop olarak başlıyor. 
+	tabloları oluşturuyor ve kapanırkende siliyor. Kayıt işleminin eskiksiz olması için burayı update veya none yapabiliriz. )
+5 Npm    ( pc ye global olarak kuruyoruz.)
+6 React ( Api ye request atmak için axios kütüphanesini npm install axios yazarak yüklüyoruz sonra import edip kullanabiliriz.Api ye request 
+	attığımızda domain belirtilmediyse react kendi çalıştığı domaini default olarak kullanıyor.Localhost:3000 gibi.Bunu değiştirmek için
+	 package.json a proxy : http://localhost:8084/ gibi belirtebiliriz.Translate fonksiyonu için npm i18n ve react-in18n implementasyonlarını
+	yapıyoruz.Sonra bunun js uzantılı bir dosya ile configurasyonlarını yapıyoruz.)
+7 Bootstrap ( bootstrap i override etmek için npm install bootstrap yapıyoruz. Sonra npm install node-sass yapıyoruz. src dizininde 
+	    bootstrap-override.scss dosyası oluşuturup içine @import "~bootstrap/scss/bootstrap.scss" yaparak bu dosyanın içinde istediğimiz
+	    bootstrap özelliğini Örn: $primary : #818 yaparak rengini override edebiliyoruz.bootstrap-override.scss i de index.js içine 
+	    import etmemiz gerekiyor.)
+	
+

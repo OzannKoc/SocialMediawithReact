@@ -1,0 +1,36 @@
+import * as ACTONS from "./Constants";
+import {login,signUp} from "../Api/apiCall";
+
+export  const logoutSuccess = () =>{
+    return  {
+        type : ACTONS.LOGOUT_SUCCESS
+      }
+}
+export const loginSuccess = (user) =>{
+    return{
+      type : ACTONS.LOGIN_SUCCESS,
+      payload : {
+        ...user
+      }
+    }
+
+}
+export const loginHandler = (crediantials)=>{
+  return async function(dispatch){
+      const response = await login(crediantials);
+      const user = {
+          ...response.data,
+          isLoggedIn : true,
+          password : crediantials.password
+      }
+      dispatch(loginSuccess(user));
+    return response ;
+  } 
+}
+export const signupHandler= (userBody)=>{
+  return async function(dispatch){
+    const response = await signUp(userBody);
+    await dispatch(loginHandler(userBody));
+    return  response ;
+  }
+}
