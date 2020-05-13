@@ -1,10 +1,15 @@
 import React from 'react';
-import { withRouter } from "react-router-dom";
-import { connect } from "react-redux";
+import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const ProfileCard =(props)=> {
-    const pathUsername = props.match.params.username;
-    const {username} = props;
+    const routerParams = useParams();
+    const pathUsername = routerParams.username;
+    const {username} = useSelector((store)=>{
+        return {
+            username : store.username
+        }
+    });
     let message = "We can not edit";
     if(pathUsername ===username){
         message = "We can edit";
@@ -15,9 +20,5 @@ const ProfileCard =(props)=> {
         </div>
     )
 }
-const mapStatetoProps = (store)=>{
-    return {
-      username : store.username
-    }
-  }
-export default connect(mapStatetoProps)( withRouter(ProfileCard));
+
+export default ProfileCard;
