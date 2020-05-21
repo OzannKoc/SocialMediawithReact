@@ -1,14 +1,14 @@
-import * as ACTONS from "./Constants";
+import * as ACTIONS from "./Constants";
 import {login,signUp} from "../Api/apiCall";
 
 export  const logoutSuccess = () =>{
     return  {
-        type : ACTONS.LOGOUT_SUCCESS
+        type : ACTIONS.LOGOUT_SUCCESS
       }
 }
 export const loginSuccess = (user) =>{
     return{
-      type : ACTONS.LOGIN_SUCCESS,
+      type : ACTIONS.LOGIN_SUCCESS,
       payload : {
         ...user
       }

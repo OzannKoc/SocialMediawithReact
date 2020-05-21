@@ -23,7 +23,7 @@ const App =() => {
           <Route exact path="/" component={HomePage} />
           {!isLoggedIn ? <Route path="/login" component={LoginPage} /> : null}
           <Route path="/signup" component={SignUpPage} />
-          <Route path="/user/:username" component={UserPage} />
+          <Route path="/users/:username" component={UserPage} />
           <Redirect to="/" />
         </Switch>
       </Router>
@@ -32,6 +32,7 @@ const App =() => {
   );
   
 }
+
 
 
 export default App;

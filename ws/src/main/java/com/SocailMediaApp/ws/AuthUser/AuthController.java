@@ -13,19 +13,18 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.SocailMediaApp.ws.Shared.AuthorizedUser;
-import com.SocailMediaApp.ws.Shared.JsonIncludeCase;
 import com.SocailMediaApp.ws.User.User;
 import com.SocailMediaApp.ws.User.UserRepository;
+import com.SocailMediaApp.ws.User.DTO.UserDTO;
 import com.fasterxml.jackson.annotation.JsonView;
 
 @RestController
 public class AuthController {
 
 	@PostMapping("/api/auth")
-	@JsonView(JsonIncludeCase.Base.class)
-	public ResponseEntity<?> handleAuthentication(@AuthorizedUser User user) {
+	public UserDTO handleAuthentication(@AuthorizedUser User user) {
 
-		return ResponseEntity.ok(user);
+		return new UserDTO(user);
 	}
 
 }

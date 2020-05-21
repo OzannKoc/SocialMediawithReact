@@ -5,6 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Profile;
 
 import com.SocailMediaApp.ws.User.User;
 import com.SocailMediaApp.ws.User.UserService;
@@ -16,16 +17,20 @@ public class WsApplication {
 		SpringApplication.run(WsApplication.class, args);
 	}
 	@Bean
+	@Profile("social-media-dev")
 	public CommandLineRunner createUser (UserService userService) {
 		return (args) ->{
+			for(int i=1 ; i<=25 ;i++) {
 				User user = new User();
-				user.setUsername("User");
-				user.setDisplayName("Seigneur");
+				user.setUsername("User"+i);
+				user.setDisplayName("Seigneur"+i);
 				user.setPassword("P4ssword");
 				userService.save(user);
-				
-				
-			};
+			}
+		};
 		
 	}
 }
+				
+				
+				

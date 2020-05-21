@@ -9,3 +9,21 @@ export const login = (creds) => {
 export const changeLanguage = (language) => {
   axios.defaults.headers["accept-language"] = language;
 };
+export const getUsers=(pageNumber=0,size=5)=>{
+  return axios.get(`/api/users?page=${pageNumber}&size=${size}`);
+}
+export const setAuthorizationHeader = ({username , password,isLoggedIn})=>{
+  if(isLoggedIn){
+    const authUser = `Basic ${btoa(username+":"+password)}`
+    axios.defaults.headers["Authorization"] = authUser;
+  }else{
+    delete axios.defaults.headers["Authorization"];
+  }
+}
+export const getUser = (username)=>{
+  return axios.get(`/api/users/${username}`);
+}
+export const updateUser = (username,body)=>{
+  return axios.put(`/api/users/${username}`,body);
+}
+

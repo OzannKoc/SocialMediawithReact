@@ -33,12 +33,13 @@ const LoginPage = (props) => {
         }catch(error){
             setError(error.response.data.message);      
         }
+
         
     }
     
     const{ t } = useTranslation();
     const emptyFieldCase = username&&password;
-    const pendingApiCall = useApiProgress("/api/auth");
+    const pendingApiCall = useApiProgress("post","/api/auth");
     return (
         <div className="container">
             <form>

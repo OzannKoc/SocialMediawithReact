@@ -16,7 +16,7 @@ const TopBar = (props) => {
   const onLogoutSuccess = ()=>{
     dispatch(logoutSuccess())
   }
-  const {isLoggedIn,displayName,username} = store;
+  const {isLoggedIn,username} = store;
   let link_ = (
   <ul className="navbar-nav ml-auto">
       <li className="nav-link">
@@ -31,7 +31,7 @@ if(isLoggedIn){
   link_ = (
     <ul className="navbar-nav ml-auto">
       <li className="nav-link">
-          <Link to={`/user/${username}`}> {displayName} </Link>
+          <Link to={`/users/${username}`}> {username} </Link>
        </li>
       <li className="nav-link">
         <Link to="/" onClick={onLogoutSuccess} >{t("Logout")} </Link>

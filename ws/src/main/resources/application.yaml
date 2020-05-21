@@ -7,4 +7,23 @@ spring:
         persistence:
           validation:
             mode : none 
+  data:
+    web:
+      pageable:
+        default-page-size: 10
+        max-page-size: 100
+  profiles:
+    active:
+    - social-media-dev
+---
+spring:
+  profiles: social-media-dev
+social-media:
+  upload-path: Picture-dev
+---
+spring:
+  profiles: social-media-production
+social-media:
+  upload-path: Storage-production   
+          
    

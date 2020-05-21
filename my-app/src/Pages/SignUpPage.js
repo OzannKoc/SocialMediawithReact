@@ -58,8 +58,8 @@ import {useDispatch} from "react-redux";
      }
     const {t} = useTranslation();
      const {username,displayName,password} = errors;
-     const pendingApiCallSignUp = useApiProgress("/api/users");
-     const pendingApiCallLogin = useApiProgress ("/api/auth");
+     const pendingApiCallSignUp = useApiProgress("post","/api/users");
+     const pendingApiCallLogin = useApiProgress ("post","/api/auth");
      const  pendingApiCall  = pendingApiCallSignUp || pendingApiCallLogin;
      let passwordRepeat ;
      if(form.password !== form.repeatedPassword){

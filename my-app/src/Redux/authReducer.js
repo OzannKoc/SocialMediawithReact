@@ -1,4 +1,4 @@
-import * as ACTONS from "./Constants";
+import * as ACTIONS from "./Constants";
 const defaultState = {
     isLoggedIn : false,
     username : undefined,
@@ -8,10 +8,10 @@ const defaultState = {
   }
 
 const authReducer = (state,action)=>{
-  if(action.type === ACTONS.LOGOUT_SUCCESS){
+  if(action.type === ACTIONS.LOGOUT_SUCCESS){
     return defaultState ;
   }
-  else if (action.type === ACTONS.LOGIN_SUCCESS){
+  else if (action.type === ACTIONS.LOGIN_SUCCESS){
     state = {
       ...action.payload
     }

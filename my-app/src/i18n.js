@@ -14,8 +14,16 @@ i18n.use(initReactI18next).init({
                 "Kullanıcı adı boş olamaz" : "Username must not be null",
                 "Login"  : "Login",
                 "Sign in" : "Sign in",
-                "Logout" :"Logout"
-
+                "Logout" :"Logout",
+                "Users" : "Users",
+                "Next"  : "Next >",
+                "Previous" : "< Previous",
+                "Load Failure": "Load Failure",
+                "User not found" : "User not found",
+                "Change Display Name" : "Change Display Name",
+                "Edit": "Edit",
+                "Save" : "Save",
+                "Cancel" : "Cancel"
 
             }
         },
@@ -30,7 +38,16 @@ i18n.use(initReactI18next).init({
                 "Username must not be null" : "Kullanıcı adı boş olamaz",
                 "Login" : "Giriş",
                 "Sign in" : "Giriş Yap",
-                "Logout" : "Çıkış"
+                "Logout" : "Çıkış",
+                "Users" : "Kullanıcılar",
+                "Next" : "Sonraki >",
+                "Previous" : "< Önceki",
+                "Load Failure" : "Yükleme başarısız",
+                "User not found" : "Kullanıcı bulunamadı",
+                "Change Display Name" : "Görünen ismini değiştir",
+                "Edit" : "Değiştir",
+                "Save" : "Kaydet",
+                "Cancel" : "İptal"
 
 
             }
