@@ -1,7 +1,7 @@
 package com.SocailMediaApp.ws.User;
 
 
-import java.util.List;
+
 import java.util.function.Function;
 
 import javax.validation.Valid;
@@ -22,7 +22,6 @@ import com.SocailMediaApp.ws.Shared.AuthorizedUser;
 import com.SocailMediaApp.ws.Shared.GenericResponse;
 import com.SocailMediaApp.ws.User.DTO.UpdatedUserDTO;
 import com.SocailMediaApp.ws.User.DTO.UserDTO;
-import com.fasterxml.jackson.annotation.JsonView;
 
 
 @RestController
@@ -62,7 +61,7 @@ public class UserController {
 		
 		@PutMapping("/users/{username}")
 		@PreAuthorize("#username == principal.username")
-		public UserDTO updateUser(@RequestBody UpdatedUserDTO updatedUser, @PathVariable String username) {
+		public UserDTO updateUser(@Valid @RequestBody UpdatedUserDTO updatedUser, @PathVariable String username) {
 			User user = userService.updateUser(username,updatedUser);
 				return new UserDTO(user);
 			
