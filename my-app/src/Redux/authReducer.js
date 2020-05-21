@@ -7,7 +7,7 @@ const defaultState = {
     password : undefined
   }
 
-const authReducer = (state,action)=>{
+const authReducer = (state={...defaultState},action)=>{
   if(action.type === ACTIONS.LOGOUT_SUCCESS){
     return defaultState ;
   }
@@ -17,6 +17,13 @@ const authReducer = (state,action)=>{
     }
     return state;
   } 
+  else if(action.type === ACTIONS.UPDATE_SUCCESS){
+    state = {
+      ...state,
+      ...action.payload
+    }
+    return state;
+  }
   return state;
 }
 export default authReducer;

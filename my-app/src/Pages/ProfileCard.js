@@ -1,19 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import ProfilImageWithDefault from "../Components/ProfilImageWithDefault";
 import  Input from "../Components/Input";
 import { useTranslation } from 'react-i18next';
 import {updateUser} from "../Api/apiCall";
 import {useApiProgress} from "../shared/ApiProgress";
 import ButtonWithSpinner from "../Components/ButtonWithSpinner";
+import {updateSuccess} from "../Redux/authAction";
 
 const ProfileCard =(props)=> {
+    const dispatch = useDispatch();
     const routerParams = useParams();
     const pathUsername = routerParams.username;
     const [inEditMode,setinEditMode]=useState(false);
     const [updatedDisplayName,setUpdatedDisplayName] = useState();
     const[newImage,setNewImage] = useState();
+    const[validationErrors,setValidationErrors]=useState({});
     const[user,setUser] = useState({});
     useEffect(()=>{
         setUser({...props.user})
@@ -43,6 +46,22 @@ const ProfileCard =(props)=> {
         }
 
     },[inEditMode,displayName])
+    useEffect(()=>{
+        setValidationErrors((previousValidationErrors)=>{
+            return {
+                ...previousValidationErrors,
+                displayName : undefined
+            }
+        })
+    },[updatedDisplayName])
+    useEffect(()=>{
+        setValidationErrors((previousValidationErrors)=>{
+            return {
+                ...previousValidationErrors,
+                image : undefined
+            }
+        })
+    },[newImage])
     const onClickSave = async()=>{
         let image ;
         if(newImage){
@@ -57,8 +76,9 @@ const ProfileCard =(props)=> {
          const response = await updateUser (kullanıcıAdı,body);
          setinEditMode(false);
          setUser(response.data);
+         dispatch(updateSuccess(response.data));
         }catch(error){
-
+            setValidationErrors(error.response.data.validationErrors);
         }
     }
     const onChangeFile = (event)=>{
@@ -72,7 +92,8 @@ const ProfileCard =(props)=> {
             setNewImage(fileReader.result);
         }
     }
-    
+
+    const{displayName:displayNameError,image : imageError} = validationErrors;
     
     return (
         <div>
@@ -95,8 +116,9 @@ const ProfileCard =(props)=> {
                     {
                      inEditMode &&
                      <div>
-                         <Input label={t("Change Display Name")} defaultValue={displayName} onChange={(event)=>{setUpdatedDisplayName(event.target.value)}}/>
-                         <input type="file" onChange={onChangeFile}/>
+                         <Input label={t("Change Display Name")} defaultValue={displayName} 
+                         onChange={(event)=>{setUpdatedDisplayName(event.target.value)}} error={displayNameError}/>
+                         <Input type="file" onChange={onChangeFile} error={imageError}/>
                          <div>
                          <ButtonWithSpinner onClick={onClickSave} 
                          className="btn btn-primary d-inline-flex"
