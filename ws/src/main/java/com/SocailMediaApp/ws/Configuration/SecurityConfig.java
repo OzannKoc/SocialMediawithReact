@@ -42,6 +42,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				
 			}
 		});
+		http.headers().frameOptions().disable();
 		http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/auth").authenticated()
 		.antMatchers(HttpMethod.PUT, "/api/users/{username}").authenticated()
 		.and()
