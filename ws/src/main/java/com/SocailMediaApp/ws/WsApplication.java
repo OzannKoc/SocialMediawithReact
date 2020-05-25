@@ -7,6 +7,8 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Profile;
 
+import com.SocailMediaApp.ws.PostedContents.Content;
+import com.SocailMediaApp.ws.PostedContents.ContentService;
 import com.SocailMediaApp.ws.User.User;
 import com.SocailMediaApp.ws.User.UserService;
 
@@ -18,7 +20,7 @@ public class WsApplication {
 	}
 	@Bean
 	@Profile("social-media-dev")
-	public CommandLineRunner createUser (UserService userService) {
+	public CommandLineRunner createUser (UserService userService,ContentService contentService) {
 		return (args) ->{
 			for(int i=1 ; i<=25 ;i++) {
 				User user = new User();
@@ -26,6 +28,11 @@ public class WsApplication {
 				user.setDisplayName("Seigneur"+i);
 				user.setPassword("P4ssword");
 				userService.save(user);
+			}
+			for(int i = 1 ; i<=50 ;i++) {
+				Content content = new Content();
+				content.setContent("Acımasız gerçekler - "+i);
+				contentService.save(content);
 			}
 		};
 		

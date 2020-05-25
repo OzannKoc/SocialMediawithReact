@@ -24,7 +24,10 @@ i18n.use(initReactI18next).init({
                 "Edit": "Edit",
                 "Save" : "Save",
                 "Cancel" : "Cancel",
-                "My Profile" : "My Profile"
+                "My Profile" : "My Profile",
+                "Share" : "Share",
+                "There is no content" : "There is no content",
+                "Show contents" : "Show contents"
 
             }
         },
@@ -49,7 +52,10 @@ i18n.use(initReactI18next).init({
                 "Edit" : "Değiştir",
                 "Save" : "Kaydet",
                 "Cancel" : "İptal",
-                "My Profile" : "Hesabım"
+                "My Profile" : "Hesabım",
+                "Share" : "Paylaş",
+                "There is no content" : "İçerik bulunamadı",
+                "Show contents" : "İçerikleri göster"
 
 
             }

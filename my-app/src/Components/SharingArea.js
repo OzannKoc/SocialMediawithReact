@@ -52,7 +52,7 @@ const SharingArea=()=> {
                 {focused&&<div className="text-right mt-1">
                     <ButtonWithSpinner className="btn btn-primary" 
                     onClick={onClickShare}
-                    buttonText="Bitchy"
+                    buttonText={t("Share")}
                     pendingApiCall={pendingApiCall}
                     disabled={pendingApiCall}/>
                     <button onClick={()=>{setFocused(false)}}className="btn btn-light d-inline-flex ml-2" disabled={pendingApiCall}><span className="material-icons">close</span>
