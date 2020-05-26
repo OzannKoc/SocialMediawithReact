@@ -29,6 +29,7 @@ export const updateUser = (username,body)=>{
 export const postBitchy=(bitchy)=>{
   return axios.post("/api/posts",bitchy);
 }
-export const getBitchy=(page=0)=>{
-  return axios.get("/api/posts?page="+page);
+export const getBitchy=(username,page=0)=>{
+  const path = username ? `/api/users/${username}/posts?page=`:"/api/posts?page=";
+  return axios.get(path + page);
 }

@@ -28,11 +28,11 @@ public class WsApplication {
 				user.setDisplayName("Seigneur"+i);
 				user.setPassword("P4ssword");
 				userService.save(user);
-			}
-			for(int i = 1 ; i<=50 ;i++) {
-				Content content = new Content();
-				content.setContent("Acımasız gerçekler - "+i);
-				contentService.save(content);
+				for(int j = 1 ; j<=2 ;j++) {
+					Content content = new Content();
+					content.setContent("Acımasız gerçekler - "+j+" from "+user.getDisplayName());
+					contentService.save(content,user);
+				}
 			}
 		};
 		

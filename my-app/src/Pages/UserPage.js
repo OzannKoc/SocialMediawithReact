@@ -5,12 +5,13 @@ import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useApiProgress } from '../shared/ApiProgress';
 import Spinner from '../Components/Spinner';
+import ContentFeed from '../Components/ContentFeed';
 const UserPage = ()=>{
     const [user,setUser]=useState({});
     const [notFound,setNotFound] = useState(false);
     const { t } = useTranslation();
     const {username} = useParams();
-    const pendingApiCall = useApiProgress("get","/api/users/"+username);
+    const pendingApiCall = useApiProgress("get","/api/users/"+username,true);
     useEffect(()=>{
         setNotFound(false);
     },[user])
@@ -27,11 +28,6 @@ const UserPage = ()=>{
         loadUser();
 
     },[username]);
-    if(pendingApiCall){
-        return(
-            <Spinner/>
-        )
-    }
     if(notFound){
         return(
             <div className="container">
@@ -49,11 +45,24 @@ const UserPage = ()=>{
             </div>
         )
     }
-
+    if(pendingApiCall || user.username !==username){
+        return(
+            <Spinner/>
+        )
+    }
+    
     return (
         
         <div className="container">
-            <ProfileCard user = {user}/>
+            <div className="row">
+                <div className="col">
+                    <ProfileCard user = {user}/>
+                </div>
+                <div className="col">
+                    <ContentFeed />
+                </div>
+            </div>
+            
         </div>
     )
     

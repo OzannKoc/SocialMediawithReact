@@ -4,16 +4,19 @@ import { useTranslation } from 'react-i18next';
 import ContentView from "./ContentView";
 import { useApiProgress } from '../shared/ApiProgress';
 import Spinner from './Spinner';
+import { useParams } from 'react-router-dom';
 
 const ContentFeed = () => {
     const [contentPage,setContentFeed] = useState({content:[],last:true,number:0});
-    const pendingApiCall = useApiProgress("get","/api/posts");
+    const {username} = useParams();
+    const path = username ? `/api/users/${username}/posts?page=`:"/api/posts?page=";
+    const pendingApiCall = useApiProgress("get",path);
     useEffect(()=>{
         loadContent();
     },[])
     const loadContent = async(page)=>{
         try{
-            const response = await getBitchy(page);
+            const response = await getBitchy(username,page);
             setContentFeed((previousContentPage)=>{
                 return {
                     ...response.data,

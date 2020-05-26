@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.validation.constraints.NotNull;
@@ -27,7 +28,7 @@ public class User implements UserDetails{
 	private static final long serialVersionUID = -3631650939166537567L;
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id ;
 	
 	@NotNull(message = "{SocialMediaApp.username.constraints.NotNull.message}")
