@@ -33,3 +33,15 @@ export const getBitchy=(username,page=0)=>{
   const path = username ? `/api/users/${username}/posts?page=`:"/api/posts?page=";
   return axios.get(path + page);
 }
+export const getOldBitchy=(id,username) =>{
+  const path = username ? `/api/users/${username}/posts/` : "/api/posts/" ;
+  return axios.get(path + id)
+}
+export const getNewBitchyCount = (id,username)=>{
+  const path = username ? `/api/users/${username}/posts/` : "/api/posts/" ;
+  return axios.get(path+id+"?count=true")
+}
+export const getNewBitchy=(id,username)=>{
+  const path = username ? `/api/users/${username}/posts/${id}?direction=after` : `/api/posts/${id}?direction=after`;
+  return axios.get(path);
+}

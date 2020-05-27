@@ -17,7 +17,7 @@ const LanguageSelector = (props) => {
         style={{ cursor: "pointer" }}
       />
       <img
-        onClick={onChangeLanguage.bind(this, "en")}
+        onClick={()=>onChangeLanguage("en")}
         src="https://www.countryflags.io/US/flat/24.png"
         alt="Usa Flag"
         style={{ cursor: "pointer" }}

@@ -28,7 +28,8 @@ i18n.use(initReactI18next).init({
                 "My Profile" : "My Profile",
                 "Share" : "Share",
                 "There is no content" : "There is no content",
-                "Show contents" : "Show contents"
+                "Show contents" : "Show contents",
+                "There are new content" : "There is new content"
 
             }
         },
@@ -56,13 +57,14 @@ i18n.use(initReactI18next).init({
                 "My Profile" : "Hesabım",
                 "Share" : "Paylaş",
                 "There is no content" : "İçerik bulunamadı",
-                "Show contents" : "İçerikleri göster"
+                "Show contents" : "İçerikleri göster",
+                "There are new content" : "Yeni içerikler var"
 
 
             }
         }
     },
-    fallbackLng : "tr",
+    fallbackLng : "en",
     ns : ["translations"],
     defaultNS : "translations",
     keySeparator : false,
@@ -95,4 +97,5 @@ const timeAgoTR = (number, index) => {
     ][index];
   }
   register("tr",timeAgoTR);
+
 export default i18n;

@@ -28,7 +28,7 @@ public class WsApplication {
 				user.setDisplayName("Seigneur"+i);
 				user.setPassword("P4ssword");
 				userService.save(user);
-				for(int j = 1 ; j<=2 ;j++) {
+				for(int j = 1 ; j<=20 ;j++) {
 					Content content = new Content();
 					content.setContent("Acımasız gerçekler - "+j+" from "+user.getDisplayName());
 					contentService.save(content,user);
