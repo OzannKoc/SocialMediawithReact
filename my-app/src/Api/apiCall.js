@@ -45,3 +45,6 @@ export const getNewBitchy=(id,username)=>{
   const path = username ? `/api/users/${username}/posts/${id}?direction=after` : `/api/posts/${id}?direction=after`;
   return axios.get(path);
 }
+export const uploadAttachmentFile=(attachment)=>{
+  return axios.post("/api/posts/attachment-post",attachment);
+}

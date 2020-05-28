@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.SocailMediaApp.ws.PostedContents.DTO.ContentDTO;
+import com.SocailMediaApp.ws.PostedContents.DTO.ContentSubmitDTO;
 import com.SocailMediaApp.ws.Shared.AuthorizedUser;
 import com.SocailMediaApp.ws.Shared.GenericResponse;
 import com.SocailMediaApp.ws.User.User;
@@ -36,8 +37,8 @@ public class ContentController {
 	private ContentService contentService ;
 	
 	@PostMapping("/posts")
-	public GenericResponse savePost(@Valid @RequestBody Content content,@AuthorizedUser User user) {
-		contentService.save(content,user);
+	public GenericResponse savePost(@Valid @RequestBody ContentSubmitDTO contentSubmit,@AuthorizedUser User user) {
+		contentService.save(contentSubmit,user);
 		return new GenericResponse("content saved");
 		
 	}
@@ -50,7 +51,7 @@ public class ContentController {
 		return contentService.getContentsofUser(page,username).map(ContentDTO::new);
 	}
 	@GetMapping({"/posts/{id:[0-9]+}","/users/{username}/posts/{id:[0-9]+}"} ) 
-	public ResponseEntity<?> getOldPosts(@PageableDefault(sort = "id",direction = Direction.DESC)Pageable page,
+	public ResponseEntity<?> getPosts(@PageableDefault(sort = "id",direction = Direction.DESC)Pageable page,
 			@PathVariable long id,
 			@PathVariable(required = false) String username
 			,@RequestParam(name = "count",required = false,defaultValue = "false") Boolean count

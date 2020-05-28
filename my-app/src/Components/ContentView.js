@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 
 const ContentView = (props) => {
     const{content:contentBody} = props
-    const {user,content,timeStamp} = contentBody
+    const {user,content,timeStamp,fileAttachment} = contentBody
     const {image,username,displayName} = user
     const {i18n} = useTranslation();
     const formattedTime = format(timeStamp,i18n.language);
@@ -24,9 +24,16 @@ const ContentView = (props) => {
                     </Link>
                 </div>
             </div>
-            <div className="pl-5">
-            {content}
-            </div>
+            <div className="pl-5">{content} </div>
+            {fileAttachment&&(
+                <div className="pl-5">
+                  {fileAttachment.fileType.startsWith("image") ? <img className="img-fluid" src={"/images/attachments/"+fileAttachment.name} alt={content}/>
+                  : <video  src={"/images/attachments/"+fileAttachment.name} type={fileAttachment.fileType} controls autoPlay> </video>}  
+                
+                </div>
+            )
+            }
+            
         </div>
     )
 }

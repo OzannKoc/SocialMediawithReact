@@ -9,5 +9,17 @@ import lombok.Data;
 @Configuration
 @ConfigurationProperties(prefix = "social-media")
 public class AppConfiguration {
+	
 		private String uploadPath ;
+		
+		private String profileStoragePath = "profile";
+		
+		private String attachmentStoragePath = "attachments";
+		
+		public String getProfilePath() {
+			return uploadPath+"/"+profileStoragePath;
+		}
+		public String getAttachmentPath() {
+			return uploadPath+"/"+attachmentStoragePath;
+		}
 }

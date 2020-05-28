@@ -8,8 +8,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.Size;
 
+import com.SocailMediaApp.ws.File.FileAttachment;
 import com.SocailMediaApp.ws.User.User;
 
 import lombok.Data;
@@ -20,7 +22,7 @@ public class Content {
 		@GeneratedValue(strategy = GenerationType.IDENTITY)
 		private long id ;
 		
-		@Size(max = 500 , min = 1)
+		
 		@Column(length = 500)
 		private String content;
 		
@@ -28,5 +30,9 @@ public class Content {
 		
 		@ManyToOne
 		private User user ;
+		
+		@OneToOne(mappedBy = "content")
+		private FileAttachment fileAttachment ;
+		
 }
 

@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Profile;
 
 import com.SocailMediaApp.ws.PostedContents.Content;
 import com.SocailMediaApp.ws.PostedContents.ContentService;
+import com.SocailMediaApp.ws.PostedContents.DTO.ContentSubmitDTO;
 import com.SocailMediaApp.ws.User.User;
 import com.SocailMediaApp.ws.User.UserService;
 
@@ -29,7 +30,7 @@ public class WsApplication {
 				user.setPassword("P4ssword");
 				userService.save(user);
 				for(int j = 1 ; j<=20 ;j++) {
-					Content content = new Content();
+					ContentSubmitDTO content = new ContentSubmitDTO();
 					content.setContent("Acımasız gerçekler - "+j+" from "+user.getDisplayName());
 					contentService.save(content,user);
 				}

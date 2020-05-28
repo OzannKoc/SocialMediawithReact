@@ -2,6 +2,7 @@ package com.SocailMediaApp.ws.PostedContents;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -17,6 +18,9 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Service;
 
+import com.SocailMediaApp.ws.File.FileAttachment;
+import com.SocailMediaApp.ws.File.FileAttachmentRepository;
+import com.SocailMediaApp.ws.PostedContents.DTO.ContentSubmitDTO;
 import com.SocailMediaApp.ws.User.User;
 import com.SocailMediaApp.ws.User.UserService;
 
@@ -24,14 +28,25 @@ import com.SocailMediaApp.ws.User.UserService;
 public class ContentService {
 	@Autowired
 	private ContentRepository contentRepository;
+	@Autowired
+	private FileAttachmentRepository fileAttachmentRepository;
 	
 	@Autowired
 	private UserService userService ;
 	
-	public void save(Content content, User user) {
+	public void save(ContentSubmitDTO contentSubmit, User user) {
+		Content content = new Content();
+		content.setContent(contentSubmit.getContent());
 		content.setTimeStamp(new Date());
 		content.setUser(user);
 		contentRepository.save(content);
+		Optional<FileAttachment> optionalFileAttachment = fileAttachmentRepository.findById(contentSubmit.getAttachmentId());
+		if(optionalFileAttachment.isPresent()) {
+			FileAttachment fileAttachment = optionalFileAttachment.get();
+			fileAttachment.setContent(content);
+			fileAttachmentRepository.save(fileAttachment);
+		}
+		
 	}
 
 	public Page<Content> getContents(Pageable page) {

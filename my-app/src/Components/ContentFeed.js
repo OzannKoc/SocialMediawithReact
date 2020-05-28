@@ -49,9 +49,10 @@ const ContentFeed = () => {
 
             }
         }
-        const looper = setInterval(loadNewContentCount,5000);
+        const looper = setInterval(loadNewContentCount,6000);
         return ()=>{clearInterval(looper)}
-    },[firstContendId,username])
+    },[firstContendId,username]);
+
     const loadOldContent = async()=>{
         try{
             const response = await getOldBitchy(oldContentId,username);
