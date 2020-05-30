@@ -29,8 +29,13 @@ i18n.use(initReactI18next).init({
                 "Share" : "Share",
                 "There is no content" : "There is no content",
                 "Show contents" : "Show contents",
-                "There are new content" : "There is new content"
-
+                "There are new content" : "There is new content",
+                "Delete Content" : "Delete Content",
+                "Ok" : "Ok",
+                "Close" : "Close",
+                "Are you sure to delete content?" : "Are you sure to delete content?",
+                "Delete My Account" : "Delete My Account",
+                "Are you sure to delete your account?" : "Are you sure to delete your account?"
             }
         },
         tr : {
@@ -51,14 +56,20 @@ i18n.use(initReactI18next).init({
                 "Load Failure" : "Yükleme başarısız",
                 "User not found" : "Kullanıcı bulunamadı",
                 "Change Display Name" : "Görünen ismini değiştir",
-                "Edit" : "Değiştir",
+                "Edit" : "Düzenle",
                 "Save" : "Kaydet",
                 "Cancel" : "İptal",
                 "My Profile" : "Hesabım",
                 "Share" : "Paylaş",
                 "There is no content" : "İçerik bulunamadı",
                 "Show contents" : "İçerikleri göster",
-                "There are new content" : "Yeni içerikler var"
+                "There are new content" : "Yeni içerikler var",
+                "Delete Content" : "İçeriği Sil",
+                "Ok" : "Tamam",
+                "Close" : "Kapat",
+                "Are you sure to delete content?" : "İçeriği silmek istediğinize emin misiniz?",
+                "Delete My Account" : "Hesabımı Sil",
+                "Are you sure to delete your account?" :"Hesabınızı silmek istediğinize emin misiniz?"
 
 
             }

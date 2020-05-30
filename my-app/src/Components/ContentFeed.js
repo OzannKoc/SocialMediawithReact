@@ -14,7 +14,7 @@ const ContentFeed = () => {
     const initialLoadContentsProgress = useApiProgress("get",path);
     let oldContentId = 0 ;
     let firstContendId = 0 ;
-    if(contentPage.content.length>1){
+    if(contentPage.content.length>0){
         firstContendId = contentPage.content[0].id;
         const oldContentIndex = contentPage.content.length-1;
         oldContentId = contentPage.content[oldContentIndex].id;
@@ -39,7 +39,8 @@ const ContentFeed = () => {
             }
         }
         loadContent();
-    },[username])
+    },[username]);
+    
     useEffect(()=>{
         const loadNewContentCount = async()=>{
             try{
@@ -68,6 +69,7 @@ const ContentFeed = () => {
     }
     const loadNewContent = async()=>{
         
+        
         try{
             const response = await getNewBitchy(firstContendId,username);
             setContentFeed((previousContentPage)=>{
@@ -81,6 +83,19 @@ const ContentFeed = () => {
 
         }
         
+    }
+    const onDeleteContent =(id)=>{
+        setContentFeed((previousContentPage)=>{
+            return{
+                ...previousContentPage,
+                content:previousContentPage.content.filter((content)=>{
+                    if(content.id!==id){
+                        return true;
+                    }
+                    return false ;
+                })
+            }
+        })
     }
     const{content,last} = contentPage;
     const {t} = useTranslation();
@@ -98,7 +113,7 @@ const ContentFeed = () => {
             {
                 content.map(iteratedContent=>{
                     return(
-                        <ContentView key={iteratedContent.id} content={iteratedContent}/>
+                        <ContentView key={iteratedContent.id} content={iteratedContent} onDeleteContent={onDeleteContent}/>
                     )
                 })
             }

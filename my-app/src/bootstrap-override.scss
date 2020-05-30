@@ -4,4 +4,12 @@ $primary: #818;
 
 @import "~bootstrap/scss/bootstrap.scss";
 
+.btn-delete-btn{
+    color: $gray-500;
+    padding: 0;
+}
+
+.btn-delete-btn:hover{
+    color:$danger;
+}
 

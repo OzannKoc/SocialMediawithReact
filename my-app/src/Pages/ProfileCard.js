@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import ProfilImageWithDefault from "../Components/ProfilImageWithDefault";
 import  Input from "../Components/Input";
 import { useTranslation } from 'react-i18next';
-import {updateUser} from "../Api/apiCall";
+import {updateUser, deleteUser} from "../Api/apiCall";
 import {useApiProgress} from "../shared/ApiProgress";
 import ButtonWithSpinner from "../Components/ButtonWithSpinner";
 import {updateSuccess} from "../Redux/authAction";
+import Modal from '../Components/Modal';
+import {logoutSuccess} from "../Redux/authAction";
 
 const ProfileCard =(props)=> {
     const dispatch = useDispatch();
@@ -18,6 +20,8 @@ const ProfileCard =(props)=> {
     const[newImage,setNewImage] = useState();
     const[validationErrors,setValidationErrors]=useState({});
     const[user,setUser] = useState({});
+    const[isVisible , setIsVisible]= useState(false);
+    const history = useHistory();
     useEffect(()=>{
         setUser({...props.user})
     },[props.user]);
@@ -92,10 +96,18 @@ const ProfileCard =(props)=> {
             setNewImage(fileReader.result);
         }
     }
+    const onClickDeleteUser = async()=>{
+        await deleteUser(username);
+        setIsVisible(false);
+        dispatch(logoutSuccess());
+        history.push("/");
+
+    }
 
     const{displayName:displayNameError,image : imageError} = validationErrors;
-    
+    const pendingApiCallDeleteUser = useApiProgress("delete",`/api/users/${username}`);
     return (
+        <>
         <div>
            <div className="card text-center">
                 <div className="card-header">
@@ -109,9 +121,17 @@ const ProfileCard =(props)=> {
                    !inEditMode&&<><h3>
                         {displayName}@{kullanıcıAdı}
                     </h3>
-                    {editable&&<button className="btn btn-success d-inline-flex" onClick={()=>{setinEditMode(true)}}>
+                    {editable&&<><div><button className="btn btn-success d-inline-flex" onClick={()=>{setinEditMode(true)}}>
                     <span className="material-icons">create</span>
-                    {t("Edit")} </button>}
+                    {t("Edit")} </button></div>
+                    <div className="pt-1">
+                    <ButtonWithSpinner 
+                    onClick={()=> setIsVisible(true)}
+                    className="btn btn-danger btn-sm d-inline-flex"
+                     buttonText={<div className="d-inline-flex" ><span className="material-icons mr-2">
+                            person_remove
+                            </span>{t("Delete My Account")}</div>}/>
+                    </div></>}
                     </>}
                     {
                      inEditMode &&
@@ -139,6 +159,17 @@ const ProfileCard =(props)=> {
                 </div>
             </div>
         </div>
+        <Modal 
+        visible={isVisible}
+        onClickOk={onClickDeleteUser}
+        onClickCancel={()=>setIsVisible(false)} 
+        message={
+            <div>
+                    <strong>{t("Are you sure to delete your account?")}</strong>
+            </div>
+        }
+        pendingApiCall={pendingApiCallDeleteUser}/>
+        </>
     )
 }
 

@@ -48,3 +48,9 @@ export const getNewBitchy=(id,username)=>{
 export const uploadAttachmentFile=(attachment)=>{
   return axios.post("/api/posts/attachment-post",attachment);
 }
+export const deleteContent=(id)=>{
+  return axios.delete(`/api/posts/${id}`);
+}
+export const deleteUser = (username)=>{
+  return axios.delete(`/api/users/${username}`);
+}
