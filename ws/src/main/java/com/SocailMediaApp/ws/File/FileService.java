@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.SocailMediaApp.ws.Configuration.AppConfiguration;
+import com.SocailMediaApp.ws.User.User;
 
 @Service
 @EnableScheduling
@@ -104,6 +105,15 @@ public class FileService {
 			deleteUnusedAttachments(file.getName());
 			fileAttachmentRepository.deleteById(file.getId());
 		}
+	}
+
+	public void deleteAllStoredFilesOfUser(User inDB) {
+		deleteOldImageFile(inDB.getImage());
+		List<FileAttachment> toBeDeletedAttachmentFiles = fileAttachmentRepository.findByContentUser(inDB);
+		for(FileAttachment file : toBeDeletedAttachmentFiles) {
+			deleteUnusedAttachments(file.getName());
+		}
+		
 	}
 
 	

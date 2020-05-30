@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.SocailMediaApp.ws.Errors.NotFoundExceptions;
 import com.SocailMediaApp.ws.File.FileService;
+import com.SocailMediaApp.ws.PostedContents.ContentService;
 import com.SocailMediaApp.ws.User.DTO.UpdatedUserDTO;
 import com.SocailMediaApp.ws.User.DTO.UserDTO;
 
@@ -22,6 +23,8 @@ public class UserService {
 	private UserRepository userRepository ;
 	private PasswordEncoder passwordEncoder;
 	private FileService fileService ;
+	
+	
 	
 	
 	public UserService(PasswordEncoder passwordEncoder, FileService fileService) {
@@ -67,6 +70,13 @@ public class UserService {
 			fileService.deleteOldImageFile(oldImageName);
 		}
 		return userRepository.save(inDB);
+		
+	}
+
+	public void deleteUser(String username) {
+		User inDB = userRepository.findByUsername(username);
+		fileService.deleteAllStoredFilesOfUser(inDB);
+		userRepository.delete(inDB);
 		
 	}
 	

@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 
 import com.SocailMediaApp.ws.File.FileAttachment;
 import com.SocailMediaApp.ws.File.FileAttachmentRepository;
+import com.SocailMediaApp.ws.File.FileService;
 import com.SocailMediaApp.ws.PostedContents.DTO.ContentSubmitDTO;
 import com.SocailMediaApp.ws.User.User;
 import com.SocailMediaApp.ws.User.UserService;
@@ -33,6 +34,9 @@ public class ContentService {
 	
 	@Autowired
 	private UserService userService ;
+	
+	@Autowired
+	private FileService fileService ;
 	
 	public void save(ContentSubmitDTO contentSubmit, User user) {
 		Content content = new Content();
@@ -70,6 +74,7 @@ public class ContentService {
 	
 
 	public long getNewContentsCount(long id, String username) {
+		
 		Specification<Content> specification = greaterThan(id);
 		if(username !=null) {
 			User inDB = userService.getUser(username);
@@ -113,6 +118,18 @@ public class ContentService {
 		};
 		
 	}
+
+	public void delete(long id) {
+		Content content = contentRepository.getOne(id);
+		if(content.getFileAttachment()!=null) {
+			String fileName = content.getFileAttachment().getName();
+			fileService.deleteUnusedAttachments(fileName);
+		}
+		contentRepository.deleteById(id);
+	}
+	
+	
+	
 	
 	
 

@@ -15,4 +15,5 @@ public interface ContentRepository extends JpaRepository<Content, Long>,JpaSpeci
 
 	public Page<Content> findByUser(Pageable page, User user);
 	
+	
 }

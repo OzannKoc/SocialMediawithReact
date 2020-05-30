@@ -11,7 +11,7 @@ import lombok.Data;
 public class UpdatedUserDTO {
 	
 	@NotNull(message = "{SocialMediaApp.displayName.constraints.NotNull.message}")
-	@Size(min = 8 , max=255)
+	@Size(min = 4 , max=255)
 	private String displayName ;
 	
 	@FileType(types = {"jpeg","png"})

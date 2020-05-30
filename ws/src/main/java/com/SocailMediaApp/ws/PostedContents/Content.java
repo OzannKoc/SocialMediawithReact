@@ -2,6 +2,7 @@ package com.SocailMediaApp.ws.PostedContents;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -31,7 +32,7 @@ public class Content {
 		@ManyToOne
 		private User user ;
 		
-		@OneToOne(mappedBy = "content")
+		@OneToOne(mappedBy = "content",cascade = CascadeType.REMOVE)
 		private FileAttachment fileAttachment ;
 		
 }

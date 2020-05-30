@@ -23,17 +23,17 @@ public class WsApplication {
 	@Profile("social-media-dev")
 	public CommandLineRunner createUser (UserService userService,ContentService contentService) {
 		return (args) ->{
-			for(int i=1 ; i<=25 ;i++) {
+			for(int i=1 ; i<=4 ;i++) {
 				User user = new User();
 				user.setUsername("User"+i);
 				user.setDisplayName("Seigneur"+i);
 				user.setPassword("P4ssword");
 				userService.save(user);
-				for(int j = 1 ; j<=20 ;j++) {
-					ContentSubmitDTO content = new ContentSubmitDTO();
-					content.setContent("Acımasız gerçekler - "+j+" from "+user.getDisplayName());
-					contentService.save(content,user);
-				}
+//				for(int j = 1 ; j<=3 ;j++) {
+//					ContentSubmitDTO content = new ContentSubmitDTO();
+//					content.setContent("Acımasız gerçekler - "+j+" from "+user.getDisplayName());
+//					contentService.save(content,user);
+//				}
 			}
 		};
 		
